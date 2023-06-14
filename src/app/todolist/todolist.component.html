@@ -1,0 +1,77 @@
+<div class="container-fluid bg-light">
+  <div class="container bg-light">
+    <div class="row mt-4" style="height: 500px">
+      <div class="col"></div>
+      <div class="col-md-6 bg-white shadow">
+        <div class="card bg-warning mt-4">
+          <h4 class="text-white ps-3 pt-2 pb-2">Lista de Tareas</h4>
+        </div>
+        <div class="shadow">
+          <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+            <div class="input-group p-4">
+              <input
+                type="text"
+                class="form-control"
+                id="task"
+                placeholder="Agregue tarea"
+                ngModel
+                name="task"
+                required
+              />
+              <small
+                *ngIf="taskForm.invalid && taskForm.dirty"
+                id="errorMessage"
+                class="form-text text-danger"
+                >Agregue tarea</small
+              >
+              <button
+                [disabled]="taskForm.invalid"
+                class="btn btn-outline-success"
+                type="submit"
+              >
+                +
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div style="overflow-y: auto; height: 350px">
+          <div class="m-3">
+            <div class="p-2 shadow">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Tareas</th>
+                    <th scope="col">Completado</th>
+                    <th scope="col">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let t of taskArray; index as i">
+                    <td>{{ t.taskName }}</td>
+                    <td>
+                      <input
+                        (change)="onCheck(i)"
+                        id="myCheckbox"
+                        type="checkbox"
+                      />
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-danger btn-sm"
+                        (click)="onDelete(i)"
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>
